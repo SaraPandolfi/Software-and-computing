@@ -27,6 +27,17 @@ rule = {"111": '0', "110": '0', "101": '0', "000": '0',
 
 seed = '10001000000000010000000001'
 
+
+"""the evolution function have 2 parts.
+    In the first part, it's creating a list of all the blocks of 3 numbers,
+    starting from the first bit of seed to the last. On the last bits,
+    it's follwing the boundary condition mentioned above.
+    
+    In the second part, the objects of the list generated is being referenced 
+    to the dictionary of rules and the result is presented as a string.
+
+"""
+
 def evolution(initial_state):
     
     patterns = [] #This is the list of all patterns in initial_state, n at a time
