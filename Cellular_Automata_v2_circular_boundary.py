@@ -1,0 +1,65 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Mar 16 20:17:08 2022
+
+@author: KUMAR
+"""
+
+"""
+    In this version, the program is taking a rule and a seed as initial_state
+    to simulate for 200 generations:
+    
+    For the border, we have assumed a circular system.
+    That is after the last bit of the seed, the first bit of the seed
+    is counted as next bit
+    
+    for example, if "12345", the patterns will be 123,234,345, 451,512
+    
+    In the next version, we can apply other rules for the boundary condition.
+    
+    for "rule" and "seed", it can work for almost any as long as:
+        the seed and rule are represented in 1 and 0.
+        the factors in the rule is of length 3.
+        All the 8 possibilities for rule of length 3 is defined.
+        
+"""
+
+
+rule = {"111": '0', "110": '0', "101": '0', "000": '0',
+        "100": '1', "011": '1', "010": '1', "001": '1',}
+
+seed = '10001000000000010000000001'
+
+def evolution(initial_state):
+    
+    patterns = [] #This is the list of all patterns in initial_state, n at a time
+    
+    for i in range(len(initial_state)):
+        
+        if i <= len(initial_state)-3:
+            patterns.append(initial_state[i:i+3])
+        
+        elif i == len(initial_state)-2:
+            block_2 = initial_state[i:i+2]
+            block_2+= initial_state[0]
+            patterns.append(block_2)
+            
+        elif i == len(initial_state)-1:
+            block_1 = initial_state[i:i+1]
+            block_1 += initial_state[0:2]
+            patterns.append(block_1)
+            
+            
+    next_state = ""   #this is the new state based on the rules
+
+    for i in range(len(patterns)): #the objects of the list created above in patterns
+        
+        next_state += rule[patterns[i]]  
+        
+    return next_state
+
+
+for i in range (200):
+    
+    print (evolution(seed))
+    seed = evolution(seed)
