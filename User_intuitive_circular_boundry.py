@@ -6,8 +6,8 @@ Created on Wed Mar 16 20:17:08 2022
 """
 
 """
-    In this version, the program is taking a rule and a seed as initial_state
-    to simulate for 200 generations:
+    In this version, the program is taking input from the user for
+    seed and the number of iterations. Rule30 is used.
     
     For the border, we have assumed a circular system.
     That is after the last bit of the seed, the first bit of the seed
@@ -25,7 +25,7 @@ Created on Wed Mar 16 20:17:08 2022
 """
 
 
-rule30 = {"111": '0', "110": '0', "101": '0', "000": '0',
+rule = {"111": '0', "110": '0', "101": '0', "000": '0',
         "100": '1', "011": '1', "010": '1', "001": '1',}
 
 seed = '10001000000000010000000001'
@@ -75,7 +75,8 @@ for i in range (200):
     print (evolution(seed, rule30))
     seed = evolution(seed, rule30)
 """    
-    
+
+
 """
     This function will take user input for seed and number of iterations
 """
