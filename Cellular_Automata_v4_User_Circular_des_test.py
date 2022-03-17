@@ -142,7 +142,7 @@ def game_of_life(seed, num): #takes seed and num as parameters
         
     ###### Test of function 'game_of_life' ##########
         
-def test_game_of_life():
+#def test_game_of_life():
     
     #function game_of_life is not returning anything but just printing
     #look for how can it be tested expect for manual testing
