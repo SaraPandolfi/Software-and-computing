@@ -16,7 +16,7 @@ rule = {"111": '0', "110": '0', "101": '0', "000": '0',
 ############ Function "unit_patterns" start #################
 """
     
-    The function "unit_patterns" creates list of off the individual units in
+    The function "unit_patterns" creates list of the individual units in
     the initial_state.
     It takes in 'initial_state' as parameter and returns the created list as 'patterns'
     Basically, It runs through the initital_state from
@@ -46,15 +46,15 @@ def unit_patterns(initial_state):
         if i <= len(initial_state)-3:   #for bits with 2 available succedding bits 
             patterns.append(initial_state[i:i+3]) #first 3 bits of initial_state are appended as item to the list
         
-        elif i == len(initial_state)-2: #for bits with only one available succedding bit
+        elif i == len(initial_state)-2: #for bit with only one available succedding bit
             block_2 = initial_state[i:i+2] #block_2 becomes a string of the two avilable bits
             block_2+= initial_state[0] #the first bit of initial_output is added as the next bit thus, circular
-            patterns.append(block_2) #the final pattern 'block2' is append as item to the list
+            patterns.append(block_2) #the final pattern 'block2' is appended as item to the list
             
-        elif i == len(initial_state)-1: 
-            block_1 = initial_state[i:i+1]
-            block_1 += initial_state[0:2]
-            patterns.append(block_1)
+        elif i == len(initial_state)-1: # for bit with no succedding bit
+            block_1 = initial_state[i:i+1] # block_1 becomes of a string of the one bit
+            block_1 += initial_state[0:2] # the first and second bit of initial_output is added as the next two bits
+            patterns.append(block_1) #the final pattern 'block1' is appended as item to the list
     return patterns
 
 
@@ -125,7 +125,7 @@ def test_next_state():
 """
     The function 'game_of_life' takes in 'seed' and 'num' as parameter.
     The seed will be feed to the function 'next_state' as parameter.
-    The num defines the number of times the simulation is run for.
+    The num defines the number of times the simulation runs for.
     
     This function doesn't 'returns' anything but prints the return value of
     'next_state' function which is iterated for 'num' times.
