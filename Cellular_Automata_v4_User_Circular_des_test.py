@@ -34,9 +34,23 @@ rule = {"111": '0', "110": '0', "101": '0', "000": '0',
     If we apply it from the start as well, the first element of the list will
     be '512' and this may change the sequence of the final output depending on
     the defined rule.
+    
+    Update: An another function with same name 'unit_patterns' has been added in which
+    the cicular rule is applied both at the start and at the end.
+    That is using this second version, the unit blocks discussed above will be
+    ['512', '123', '234', '345', '451']
+    
+    Basically, either way the items of the list will remain the same, with only change being
+    the last item of the list becomes first item.
+    
+    But the result in terms of binary will be same for this purpose. That is;
+    11001 indicates 3 live(1) and 2 dead(0) in that generation and so does, 11100 and 00111 and 10011 etc.
 
 """
 
+
+### This function has been commented out. The second version mentioned below is active.
+'''
 def unit_patterns(initial_state):
     
     patterns = [] #This blank list will store all the created patterns
@@ -71,6 +85,50 @@ def test_unit_patterns():
 
 
 #################### Function 'unit_patterns' end ############
+'''
+
+
+
+####################### Function 'unit_patterns' with circular boundary at start and end ########################
+
+def unit_patterns(initial_state):
+    
+    patterns = [] #This blank list will store all the created patterns
+    
+    for i in range(len(initial_state)): #it will run for all the bits of the initial_state
+        
+        
+        if i != 0 and i != (len(initial_state)-1):
+            patterns.append(initial_state[i-1:i+2])
+        
+        elif i == 0:
+            block_first = initial_state[-1]
+            block_first += initial_state[0:2]
+            patterns.append(block_first)
+            
+        elif i == (len(initial_state)-1):
+            block_last = initial_state[i-1:i+2]
+            block_last += initial_state[0]
+            patterns.append(block_last)
+            
+            
+            
+    return patterns
+
+
+################ Test for this version of 'unit_patterns' ################
+
+def test_unit_patterns():
+    
+    assert unit_patterns ("1234567") == ['712', '123', '234', '345', '456', '567', '671']
+    assert unit_patterns ("") == []
+    assert unit_patterns ("01") == ['101', '010']
+        
+        
+ ######################## Funtion 'unit_patterns' version 2 end ####################################
+
+
+
 
 
 
