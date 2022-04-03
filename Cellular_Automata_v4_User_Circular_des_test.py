@@ -1,14 +1,36 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Mar 17 19:28:41 2022
+##List of Rules in dict format
 
-@author: KUMAR
-"""
-
-rule = {"111": '0', "110": '0', "101": '0', "000": '0',
+rule30 = {"111": '0', "110": '0', "101": '0', "000": '0',
         "100": '1', "011": '1', "010": '1', "001": '1'}
 
-#This is the rule this program uses for simulation.
+rule110 = {"111": '0', "110": '1', "101": '1', "000": '0',
+        "100": '0', "011": '1', "010": '1', "001": '1'}
+
+rule90 = {"111": "0", "110": "1", "101": "0", "100": "1",
+          "011": "1", "010": "0", "001": "1", "000": "0"}
+
+rule54 = {"111": '0', "110": '0', "101": '1', "000": '0',
+        "100": '1', "011": '0', "010": '1', "001": '1'}
+
+rule126 = {"111": '0', "110": '1', "101": '1', "000": '0',
+        "100": '1', "011": '1', "010": '1', "001": '1'}
+
+rule150 = {"111": '1', "110": '0', "101": '0', "000": '0',
+        "100": '1', "011": '0', "010": '1', "001": '1'}
+
+rule60 = {"111": '0', "110": '0', "101": '1', "000": '0',
+        "100": '1', "011": '1', "010": '1', "001": '0'}
+
+
+## dict of all rules
+
+rule_list = {30 : rule30, 110 : rule110, 54 : rule54,
+             126 : rule126, 150 : rule150, 60 : rule60,
+             90 : rule90} 
+
+
+""" To include more rules, just add rule above and place it in
+the rule_list dictionary, no other changes required in the code"""
 
 
 
@@ -145,7 +167,7 @@ def test_unit_patterns():
     The 'new_state' is of the same length as 'initial_state'
     
 """
-def next_state(initial_state): #the parameter is required by the other function inside.
+def next_state(initial_state, rule_num): #the parameter is required by the other function inside.
     
     
     all_patterns = unit_patterns(initial_state) #the result of function 'unit_patterns' is saved as list 'all_patterns'
@@ -155,7 +177,8 @@ def next_state(initial_state): #the parameter is required by the other function 
     
     for i in range(len(all_patterns)): # it runs for every item of list 'all_patterns'
         
-        new_state += rule[all_patterns[i]] #the result from dict rule for the list item is added as string to the empty string
+        new_state += rule_list[rule_num][all_patterns[i]]
+        #new_state += rule[all_patterns[i]] #the result from dict rule for the list item is added as string to the empty string
         
     return new_state #the new_state is returned which will be of the same length as initial_state
 
@@ -189,11 +212,11 @@ def test_next_state():
     'next_state' function which is iterated for 'num' times.
 """
 
-def game_of_life(seed, num): #takes seed and num as parameters
+def game_of_life(seed, num, rule_num): #takes seed and num as parameters
       
     for i in range(num): #num times the simulation runs
         
-        evolved_state = next_state(seed) # the output of next_state function for parameter 'seed' is saved as evolved_state
+        evolved_state = next_state(seed, rule_num) # the output of next_state function for parameter 'seed' is saved as evolved_state
         print (evolved_state) # the output 'evolved_state' is printed
         seed = evolved_state # the evolved_state is supplied as 'seed' i.e, 'initial_state' to the function 'next_state' on every new iteration 
     
@@ -226,9 +249,10 @@ def start_program():
     
     print("This is the game of life based on rule 30. Let's Play!")
     seed = input("Define the initial state of the system. Use only 0 and 1.\nEnter the seed value: ")
+    rule_num = int(input("Enter rule number (for ex, 30 for Rule 30): "))
     num = int(input("Enter the number of times to run the simulation: "))
     
-    game_of_life(seed, num)
+    game_of_life(seed, num, rule_num)
            
 
 
