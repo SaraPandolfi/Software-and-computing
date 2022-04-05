@@ -247,8 +247,8 @@ def game_of_life(seed, num, rule_num): #takes seed and num as parameters
                   
 def start_program():
     
-    print("This is the game of life based on rule 30. Let's Play!")
-    seed = input("Define the initial state of the system. Use only 0 and 1.\nEnter the seed value: ")
+    print("This is the game of life based on rule 30, 54, 60, 90, 110, 126, 150. Let's Play!")
+    seed = input("Define the initial state of the system. Use only 0 and 1, use at least three digits (for ex, 001)\nEnter the seed value: ")
     rule_num = int(input("Enter rule number (for ex, 30 for Rule 30): "))
     num = int(input("Enter the number of times to run the simulation: "))
     
